@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Account - Smartan Rehab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 550px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 40px 35px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: #e53935;
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        .warning-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 18px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+
+        .warning-box strong {
+            color: #856404;
+        }
+
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px 18px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            font-size: 0.85rem;
+            color: #000;
+        }
+
+        .info-box h3 {
+            color: #000;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .info-box ul {
+            margin: 5px 0 0 18px;
+        }
+
+        .info-box ul li {
+            color: #000;
+            margin-bottom: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+        input[type="email"],
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        input[type="email"]:focus,
+        input[type="text"]:focus {
+            border-color: #e53935;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 4px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            font-weight: 400;
+            font-size: 0.85rem;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .btn-delete {
+            width: 100%;
+            padding: 14px;
+            background-color: #e53935;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-delete:hover {
+            background-color: #c62828;
+        }
+
+        .btn-delete:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-link a:hover {
+            color: #333;
+        }
+
+        /* Success / Error messages */
+        .message {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+            font-size: 0.95rem;
+        }
+
+        .message.success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+
+        .message.error {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+            color: #888;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #ddd;
+            border-top-color: #e53935;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Delete Your Account</h1>
+            <p class="subtitle">Smartan Rehab</p>
+
+            <div class="warning-box">
+                <strong>Warning:</strong> This action is permanent and cannot be undone. All your data will be permanently deleted.
+            </div>
+
+            <div class="info-box">
+                <h3>The following data will be deleted:</h3>
+                <ul>
+                    <li>Your account and login credentials</li>
+                    <li>Profile information (name, email, etc.)</li>
+                    <li>Workout history and fitness data</li>
+                    <li>All preferences and settings</li>
+                </ul>
+            </div>
+
+            <form id="deleteForm" onsubmit="handleDelete(event)">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your registered email" required>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="confirm" required>
+                    <label for="confirm">I understand that my account and all associated data will be permanently deleted and this action cannot be undone.</label>
+                </div>
+
+                <button type="submit" class="btn-delete" id="deleteBtn">Request Account Deletion</button>
+            </form>
+
+            <div class="loading" id="loading">
+                <span class="spinner"></span> Processing your request...
+            </div>
+
+            <div class="message success" id="successMsg">
+                Your account deletion request has been received. Your account and all associated data will be deleted within 48 hours.
+            </div>
+
+            <div class="message error" id="errorMsg">
+                Something went wrong. Please try again or contact us at <strong>support@smartanfitness.com</strong>
+            </div>
+
+        
+        </div>
+    </div>
+
+    <script>
+        async function handleDelete(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const confirm = document.getElementById('confirm').checked;
+            const deleteBtn = document.getElementById('deleteBtn');
+            const loading = document.getElementById('loading');
+            const successMsg = document.getElementById('successMsg');
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (!email || !confirm) return;
+
+            // Hide previous messages
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+
+            // Show loading
+            deleteBtn.disabled = true;
+            loading.style.display = 'block';
+
+            try {
+                const response = await fetch('http://localhost:5000/api/delete-account-request', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+
+                if (response.ok) {
+                    successMsg.style.display = 'block';
+                    document.getElementById('deleteForm').style.display = 'none';
+                } else {
+                    throw new Error('Request failed');
+                }
+            } catch (error) {
+                errorMsg.style.display = 'block';
+            } finally {
+                loading.style.display = 'none';
+                deleteBtn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
